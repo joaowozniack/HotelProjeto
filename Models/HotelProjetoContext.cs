@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HotelProjeto
 {
-    public class EFCodeFirstContext : DbContext
+    public class HotelProjetoContext : DbContext
     {
         public DbSet<Cliente> Cliente {get; set;} = null!;
         public DbSet<Cargo> Cargo {get; set;} = null!;
@@ -22,7 +22,7 @@ namespace HotelProjeto
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.\;Database=HotelCodeFirst;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer(@"Server=.\;Database=HotelProjeto;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;");
         }
     }
 }
