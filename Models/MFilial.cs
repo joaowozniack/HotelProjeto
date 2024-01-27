@@ -2,12 +2,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HotelProjeto
 {
-    public class Filial
+    public class MFilial
     {
         [Key]
         public int codFilial {get; set;}
         public string? nome {get; set;}
-        public Endereco? codEndereco {get; set;}
+        public MEndereco? codEndereco {get; set;}
         public int numeroQuartoSolteiro {get; set;}
         public double valorQuartoSolteiro {get; set;}
         public int numeroQuartoCasal {get; set;}

@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HotelProjeto
 {
-    public class TipoServicoLavanderia
+    public class MTipoServicoLavanderia
     {
         [Key]
         public int codTipoServico {get; set;}

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelProjeto.Migrations
 {
     [DbContext(typeof(HotelProjetoContext))]
-    [Migration("20240127150352_CreateDatabase")]
+    [Migration("20240127155214_CreateDatabase")]
     partial class CreateDatabase
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace HotelProjeto.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("HotelProjeto.Cargo", b =>
+            modelBuilder.Entity("HotelProjeto.MCargo", b =>
                 {
                     b.Property<int>("codCargo")
                         .ValueGeneratedOnAdd()
@@ -38,10 +38,10 @@ namespace HotelProjeto.Migrations
 
                     b.HasKey("codCargo");
 
-                    b.ToTable("Cargo");
+                    b.ToTable("MCargo");
                 });
 
-            modelBuilder.Entity("HotelProjeto.Cliente", b =>
+            modelBuilder.Entity("HotelProjeto.MCliente", b =>
                 {
                     b.Property<int>("codCliente")
                         .ValueGeneratedOnAdd()
@@ -63,10 +63,10 @@ namespace HotelProjeto.Migrations
 
                     b.HasKey("codCliente");
 
-                    b.ToTable("Cliente");
+                    b.ToTable("MCliente");
                 });
 
-            modelBuilder.Entity("HotelProjeto.ConsumoRestauranteFrigobar", b =>
+            modelBuilder.Entity("HotelProjeto.MConsumoRestauranteFrigobar", b =>
                 {
                     b.Property<int>("codConsumo")
                         .ValueGeneratedOnAdd()
@@ -90,10 +90,10 @@ namespace HotelProjeto.Migrations
 
                     b.HasIndex("numeroConta1");
 
-                    b.ToTable("ConsumoRestauranteFrigobar");
+                    b.ToTable("MConsumoRestauranteFrigobar");
                 });
 
-            modelBuilder.Entity("HotelProjeto.Conta", b =>
+            modelBuilder.Entity("HotelProjeto.MConta", b =>
                 {
                     b.Property<int>("numeroConta")
                         .ValueGeneratedOnAdd()
@@ -111,10 +111,10 @@ namespace HotelProjeto.Migrations
 
                     b.HasIndex("codCliente1");
 
-                    b.ToTable("Conta");
+                    b.ToTable("MConta");
                 });
 
-            modelBuilder.Entity("HotelProjeto.Endereco", b =>
+            modelBuilder.Entity("HotelProjeto.MEndereco", b =>
                 {
                     b.Property<int>("codEndereco")
                         .ValueGeneratedOnAdd()
@@ -139,10 +139,10 @@ namespace HotelProjeto.Migrations
 
                     b.HasKey("codEndereco");
 
-                    b.ToTable("Endereco");
+                    b.ToTable("MEndereco");
                 });
 
-            modelBuilder.Entity("HotelProjeto.Filial", b =>
+            modelBuilder.Entity("HotelProjeto.MFilial", b =>
                 {
                     b.Property<int>("codFilial")
                         .ValueGeneratedOnAdd()
@@ -187,10 +187,10 @@ namespace HotelProjeto.Migrations
 
                     b.HasIndex("codEndereco1");
 
-                    b.ToTable("Filial");
+                    b.ToTable("MFilial");
                 });
 
-            modelBuilder.Entity("HotelProjeto.FormaPagamento", b =>
+            modelBuilder.Entity("HotelProjeto.MFormaPagamento", b =>
                 {
                     b.Property<int>("codForma")
                         .ValueGeneratedOnAdd()
@@ -203,10 +203,10 @@ namespace HotelProjeto.Migrations
 
                     b.HasKey("codForma");
 
-                    b.ToTable("FormaPagamento");
+                    b.ToTable("MFormaPagamento");
                 });
 
-            modelBuilder.Entity("HotelProjeto.Funcionario", b =>
+            modelBuilder.Entity("HotelProjeto.MFuncionario", b =>
                 {
                     b.Property<int>("codFuncionario")
                         .ValueGeneratedOnAdd()
@@ -224,10 +224,10 @@ namespace HotelProjeto.Migrations
 
                     b.HasIndex("codCargo1");
 
-                    b.ToTable("Funcionario");
+                    b.ToTable("MFuncionario");
                 });
 
-            modelBuilder.Entity("HotelProjeto.Pagamento", b =>
+            modelBuilder.Entity("HotelProjeto.MPagamento", b =>
                 {
                     b.Property<int>("codPagamento")
                         .ValueGeneratedOnAdd()
@@ -247,10 +247,10 @@ namespace HotelProjeto.Migrations
 
                     b.HasIndex("numeroConta1");
 
-                    b.ToTable("Pagamento");
+                    b.ToTable("MPagamento");
                 });
 
-            modelBuilder.Entity("HotelProjeto.Quarto", b =>
+            modelBuilder.Entity("HotelProjeto.MQuarto", b =>
                 {
                     b.Property<int>("numeroQuarto")
                         .ValueGeneratedOnAdd()
@@ -268,10 +268,10 @@ namespace HotelProjeto.Migrations
 
                     b.HasIndex("codTipoQuartocodTipo");
 
-                    b.ToTable("Quarto");
+                    b.ToTable("MQuarto");
                 });
 
-            modelBuilder.Entity("HotelProjeto.Reserva", b =>
+            modelBuilder.Entity("HotelProjeto.MReserva", b =>
                 {
                     b.Property<int>("codReserva")
                         .ValueGeneratedOnAdd()
@@ -302,10 +302,10 @@ namespace HotelProjeto.Migrations
 
                     b.HasIndex("numeroQuarto1");
 
-                    b.ToTable("Reserva");
+                    b.ToTable("MReserva");
                 });
 
-            modelBuilder.Entity("HotelProjeto.ServicoLavanderia", b =>
+            modelBuilder.Entity("HotelProjeto.MServicoLavanderia", b =>
                 {
                     b.Property<int>("codServico")
                         .ValueGeneratedOnAdd()
@@ -325,10 +325,10 @@ namespace HotelProjeto.Migrations
 
                     b.HasIndex("numeroConta1");
 
-                    b.ToTable("ServicoLavanderia");
+                    b.ToTable("MServicoLavanderia");
                 });
 
-            modelBuilder.Entity("HotelProjeto.TipoQuarto", b =>
+            modelBuilder.Entity("HotelProjeto.MTipoQuarto", b =>
                 {
                     b.Property<int>("codTipo")
                         .ValueGeneratedOnAdd()
@@ -347,10 +347,10 @@ namespace HotelProjeto.Migrations
 
                     b.HasKey("codTipo");
 
-                    b.ToTable("TipoQuarto");
+                    b.ToTable("MTipoQuarto");
                 });
 
-            modelBuilder.Entity("HotelProjeto.TipoServicoLavanderia", b =>
+            modelBuilder.Entity("HotelProjeto.MTipoServicoLavanderia", b =>
                 {
                     b.Property<int>("codTipoServico")
                         .ValueGeneratedOnAdd()
@@ -366,52 +366,52 @@ namespace HotelProjeto.Migrations
 
                     b.HasKey("codTipoServico");
 
-                    b.ToTable("TipoServicoLavanderia");
+                    b.ToTable("MTipoServicoLavanderia");
                 });
 
-            modelBuilder.Entity("HotelProjeto.ConsumoRestauranteFrigobar", b =>
+            modelBuilder.Entity("HotelProjeto.MConsumoRestauranteFrigobar", b =>
                 {
-                    b.HasOne("HotelProjeto.Conta", "numeroConta")
+                    b.HasOne("HotelProjeto.MConta", "numeroConta")
                         .WithMany()
                         .HasForeignKey("numeroConta1");
 
                     b.Navigation("numeroConta");
                 });
 
-            modelBuilder.Entity("HotelProjeto.Conta", b =>
+            modelBuilder.Entity("HotelProjeto.MConta", b =>
                 {
-                    b.HasOne("HotelProjeto.Cliente", "codCliente")
+                    b.HasOne("HotelProjeto.MCliente", "codCliente")
                         .WithMany()
                         .HasForeignKey("codCliente1");
 
                     b.Navigation("codCliente");
                 });
 
-            modelBuilder.Entity("HotelProjeto.Filial", b =>
+            modelBuilder.Entity("HotelProjeto.MFilial", b =>
                 {
-                    b.HasOne("HotelProjeto.Endereco", "codEndereco")
+                    b.HasOne("HotelProjeto.MEndereco", "codEndereco")
                         .WithMany()
                         .HasForeignKey("codEndereco1");
 
                     b.Navigation("codEndereco");
                 });
 
-            modelBuilder.Entity("HotelProjeto.Funcionario", b =>
+            modelBuilder.Entity("HotelProjeto.MFuncionario", b =>
                 {
-                    b.HasOne("HotelProjeto.Cargo", "codCargo")
+                    b.HasOne("HotelProjeto.MCargo", "codCargo")
                         .WithMany()
                         .HasForeignKey("codCargo1");
 
                     b.Navigation("codCargo");
                 });
 
-            modelBuilder.Entity("HotelProjeto.Pagamento", b =>
+            modelBuilder.Entity("HotelProjeto.MPagamento", b =>
                 {
-                    b.HasOne("HotelProjeto.FormaPagamento", "codForma")
+                    b.HasOne("HotelProjeto.MFormaPagamento", "codForma")
                         .WithMany()
                         .HasForeignKey("codForma1");
 
-                    b.HasOne("HotelProjeto.Conta", "numeroConta")
+                    b.HasOne("HotelProjeto.MConta", "numeroConta")
                         .WithMany()
                         .HasForeignKey("numeroConta1");
 
@@ -420,26 +420,26 @@ namespace HotelProjeto.Migrations
                     b.Navigation("numeroConta");
                 });
 
-            modelBuilder.Entity("HotelProjeto.Quarto", b =>
+            modelBuilder.Entity("HotelProjeto.MQuarto", b =>
                 {
-                    b.HasOne("HotelProjeto.TipoQuarto", "codTipoQuarto")
+                    b.HasOne("HotelProjeto.MTipoQuarto", "codTipoQuarto")
                         .WithMany()
                         .HasForeignKey("codTipoQuartocodTipo");
 
                     b.Navigation("codTipoQuarto");
                 });
 
-            modelBuilder.Entity("HotelProjeto.Reserva", b =>
+            modelBuilder.Entity("HotelProjeto.MReserva", b =>
                 {
-                    b.HasOne("HotelProjeto.Cliente", "codCliente")
+                    b.HasOne("HotelProjeto.MCliente", "codCliente")
                         .WithMany()
                         .HasForeignKey("codCliente1");
 
-                    b.HasOne("HotelProjeto.Funcionario", "codFuncionario")
+                    b.HasOne("HotelProjeto.MFuncionario", "codFuncionario")
                         .WithMany()
                         .HasForeignKey("codFuncionario1");
 
-                    b.HasOne("HotelProjeto.Quarto", "numeroQuarto")
+                    b.HasOne("HotelProjeto.MQuarto", "numeroQuarto")
                         .WithMany()
                         .HasForeignKey("numeroQuarto1");
 
@@ -450,13 +450,13 @@ namespace HotelProjeto.Migrations
                     b.Navigation("numeroQuarto");
                 });
 
-            modelBuilder.Entity("HotelProjeto.ServicoLavanderia", b =>
+            modelBuilder.Entity("HotelProjeto.MServicoLavanderia", b =>
                 {
-                    b.HasOne("HotelProjeto.TipoServicoLavanderia", "codTipoServico")
+                    b.HasOne("HotelProjeto.MTipoServicoLavanderia", "codTipoServico")
                         .WithMany()
                         .HasForeignKey("codTipoServico1");
 
-                    b.HasOne("HotelProjeto.Conta", "numeroConta")
+                    b.HasOne("HotelProjeto.MConta", "numeroConta")
                         .WithMany()
                         .HasForeignKey("numeroConta1");
 

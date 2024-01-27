@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HotelProjeto
 {
-    public class Cliente
+    public class MCliente
     {
         [Key]
         public int codCliente {get; set;}

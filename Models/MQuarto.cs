@@ -2,11 +2,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HotelProjeto
 {
-    public class Quarto
+    public class MQuarto
     {
         [Key]
         public int numeroQuarto {get; set;}
-        public TipoQuarto? codTipoQuarto {get; set;}
+        public MTipoQuarto? codTipoQuarto {get; set;}
         public double valorQuarto {get; set;}
     }
 }

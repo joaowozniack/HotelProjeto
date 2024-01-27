@@ -2,13 +2,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HotelProjeto
 {
-    public class Reserva
+    public class MReserva
     {
         [Key]
         public int codReserva {get; set;}
-        public Quarto? numeroQuarto {get; set;}
-        public Funcionario? codFuncionario {get; set;}
-        public Cliente? codCliente {get; set;}
+        public MQuarto? numeroQuarto {get; set;}
+        public MFuncionario? codFuncionario {get; set;}
+        public MCliente? codCliente {get; set;}
         public DateOnly dataCheckin {get; set;}
         public DateOnly dataCheckout {get; set;}
     }

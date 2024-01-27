@@ -12,7 +12,7 @@ namespace HotelProjeto.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Cargo",
+                name: "MCargo",
                 columns: table => new
                 {
                     codCargo = table.Column<int>(type: "int", nullable: false)
@@ -21,11 +21,11 @@ namespace HotelProjeto.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cargo", x => x.codCargo);
+                    table.PrimaryKey("PK_MCargo", x => x.codCargo);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cliente",
+                name: "MCliente",
                 columns: table => new
                 {
                     codCliente = table.Column<int>(type: "int", nullable: false)
@@ -37,11 +37,11 @@ namespace HotelProjeto.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cliente", x => x.codCliente);
+                    table.PrimaryKey("PK_MCliente", x => x.codCliente);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Endereco",
+                name: "MEndereco",
                 columns: table => new
                 {
                     codEndereco = table.Column<int>(type: "int", nullable: false)
@@ -54,11 +54,11 @@ namespace HotelProjeto.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Endereco", x => x.codEndereco);
+                    table.PrimaryKey("PK_MEndereco", x => x.codEndereco);
                 });
 
             migrationBuilder.CreateTable(
-                name: "FormaPagamento",
+                name: "MFormaPagamento",
                 columns: table => new
                 {
                     codForma = table.Column<int>(type: "int", nullable: false)
@@ -67,11 +67,11 @@ namespace HotelProjeto.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FormaPagamento", x => x.codForma);
+                    table.PrimaryKey("PK_MFormaPagamento", x => x.codForma);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TipoQuarto",
+                name: "MTipoQuarto",
                 columns: table => new
                 {
                     codTipo = table.Column<int>(type: "int", nullable: false)
@@ -82,11 +82,11 @@ namespace HotelProjeto.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TipoQuarto", x => x.codTipo);
+                    table.PrimaryKey("PK_MTipoQuarto", x => x.codTipo);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TipoServicoLavanderia",
+                name: "MTipoServicoLavanderia",
                 columns: table => new
                 {
                     codTipoServico = table.Column<int>(type: "int", nullable: false)
@@ -96,11 +96,11 @@ namespace HotelProjeto.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TipoServicoLavanderia", x => x.codTipoServico);
+                    table.PrimaryKey("PK_MTipoServicoLavanderia", x => x.codTipoServico);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Funcionario",
+                name: "MFuncionario",
                 columns: table => new
                 {
                     codFuncionario = table.Column<int>(type: "int", nullable: false)
@@ -110,16 +110,16 @@ namespace HotelProjeto.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Funcionario", x => x.codFuncionario);
+                    table.PrimaryKey("PK_MFuncionario", x => x.codFuncionario);
                     table.ForeignKey(
-                        name: "FK_Funcionario_Cargo_codCargo1",
+                        name: "FK_MFuncionario_MCargo_codCargo1",
                         column: x => x.codCargo1,
-                        principalTable: "Cargo",
+                        principalTable: "MCargo",
                         principalColumn: "codCargo");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Conta",
+                name: "MConta",
                 columns: table => new
                 {
                     numeroConta = table.Column<int>(type: "int", nullable: false)
@@ -129,16 +129,16 @@ namespace HotelProjeto.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Conta", x => x.numeroConta);
+                    table.PrimaryKey("PK_MConta", x => x.numeroConta);
                     table.ForeignKey(
-                        name: "FK_Conta_Cliente_codCliente1",
+                        name: "FK_MConta_MCliente_codCliente1",
                         column: x => x.codCliente1,
-                        principalTable: "Cliente",
+                        principalTable: "MCliente",
                         principalColumn: "codCliente");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Filial",
+                name: "MFilial",
                 columns: table => new
                 {
                     codFilial = table.Column<int>(type: "int", nullable: false)
@@ -157,16 +157,16 @@ namespace HotelProjeto.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Filial", x => x.codFilial);
+                    table.PrimaryKey("PK_MFilial", x => x.codFilial);
                     table.ForeignKey(
-                        name: "FK_Filial_Endereco_codEndereco1",
+                        name: "FK_MFilial_MEndereco_codEndereco1",
                         column: x => x.codEndereco1,
-                        principalTable: "Endereco",
+                        principalTable: "MEndereco",
                         principalColumn: "codEndereco");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Quarto",
+                name: "MQuarto",
                 columns: table => new
                 {
                     numeroQuarto = table.Column<int>(type: "int", nullable: false)
@@ -176,16 +176,16 @@ namespace HotelProjeto.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Quarto", x => x.numeroQuarto);
+                    table.PrimaryKey("PK_MQuarto", x => x.numeroQuarto);
                     table.ForeignKey(
-                        name: "FK_Quarto_TipoQuarto_codTipoQuartocodTipo",
+                        name: "FK_MQuarto_MTipoQuarto_codTipoQuartocodTipo",
                         column: x => x.codTipoQuartocodTipo,
-                        principalTable: "TipoQuarto",
+                        principalTable: "MTipoQuarto",
                         principalColumn: "codTipo");
                 });
 
             migrationBuilder.CreateTable(
-                name: "ConsumoRestauranteFrigobar",
+                name: "MConsumoRestauranteFrigobar",
                 columns: table => new
                 {
                     codConsumo = table.Column<int>(type: "int", nullable: false)
@@ -197,16 +197,16 @@ namespace HotelProjeto.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ConsumoRestauranteFrigobar", x => x.codConsumo);
+                    table.PrimaryKey("PK_MConsumoRestauranteFrigobar", x => x.codConsumo);
                     table.ForeignKey(
-                        name: "FK_ConsumoRestauranteFrigobar_Conta_numeroConta1",
+                        name: "FK_MConsumoRestauranteFrigobar_MConta_numeroConta1",
                         column: x => x.numeroConta1,
-                        principalTable: "Conta",
+                        principalTable: "MConta",
                         principalColumn: "numeroConta");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pagamento",
+                name: "MPagamento",
                 columns: table => new
                 {
                     codPagamento = table.Column<int>(type: "int", nullable: false)
@@ -216,21 +216,21 @@ namespace HotelProjeto.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pagamento", x => x.codPagamento);
+                    table.PrimaryKey("PK_MPagamento", x => x.codPagamento);
                     table.ForeignKey(
-                        name: "FK_Pagamento_Conta_numeroConta1",
+                        name: "FK_MPagamento_MConta_numeroConta1",
                         column: x => x.numeroConta1,
-                        principalTable: "Conta",
+                        principalTable: "MConta",
                         principalColumn: "numeroConta");
                     table.ForeignKey(
-                        name: "FK_Pagamento_FormaPagamento_codForma1",
+                        name: "FK_MPagamento_MFormaPagamento_codForma1",
                         column: x => x.codForma1,
-                        principalTable: "FormaPagamento",
+                        principalTable: "MFormaPagamento",
                         principalColumn: "codForma");
                 });
 
             migrationBuilder.CreateTable(
-                name: "ServicoLavanderia",
+                name: "MServicoLavanderia",
                 columns: table => new
                 {
                     codServico = table.Column<int>(type: "int", nullable: false)
@@ -240,21 +240,21 @@ namespace HotelProjeto.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ServicoLavanderia", x => x.codServico);
+                    table.PrimaryKey("PK_MServicoLavanderia", x => x.codServico);
                     table.ForeignKey(
-                        name: "FK_ServicoLavanderia_Conta_numeroConta1",
+                        name: "FK_MServicoLavanderia_MConta_numeroConta1",
                         column: x => x.numeroConta1,
-                        principalTable: "Conta",
+                        principalTable: "MConta",
                         principalColumn: "numeroConta");
                     table.ForeignKey(
-                        name: "FK_ServicoLavanderia_TipoServicoLavanderia_codTipoServico1",
+                        name: "FK_MServicoLavanderia_MTipoServicoLavanderia_codTipoServico1",
                         column: x => x.codTipoServico1,
-                        principalTable: "TipoServicoLavanderia",
+                        principalTable: "MTipoServicoLavanderia",
                         principalColumn: "codTipoServico");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Reserva",
+                name: "MReserva",
                 columns: table => new
                 {
                     codReserva = table.Column<int>(type: "int", nullable: false)
@@ -267,82 +267,82 @@ namespace HotelProjeto.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Reserva", x => x.codReserva);
+                    table.PrimaryKey("PK_MReserva", x => x.codReserva);
                     table.ForeignKey(
-                        name: "FK_Reserva_Cliente_codCliente1",
+                        name: "FK_MReserva_MCliente_codCliente1",
                         column: x => x.codCliente1,
-                        principalTable: "Cliente",
+                        principalTable: "MCliente",
                         principalColumn: "codCliente");
                     table.ForeignKey(
-                        name: "FK_Reserva_Funcionario_codFuncionario1",
+                        name: "FK_MReserva_MFuncionario_codFuncionario1",
                         column: x => x.codFuncionario1,
-                        principalTable: "Funcionario",
+                        principalTable: "MFuncionario",
                         principalColumn: "codFuncionario");
                     table.ForeignKey(
-                        name: "FK_Reserva_Quarto_numeroQuarto1",
+                        name: "FK_MReserva_MQuarto_numeroQuarto1",
                         column: x => x.numeroQuarto1,
-                        principalTable: "Quarto",
+                        principalTable: "MQuarto",
                         principalColumn: "numeroQuarto");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ConsumoRestauranteFrigobar_numeroConta1",
-                table: "ConsumoRestauranteFrigobar",
+                name: "IX_MConsumoRestauranteFrigobar_numeroConta1",
+                table: "MConsumoRestauranteFrigobar",
                 column: "numeroConta1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Conta_codCliente1",
-                table: "Conta",
+                name: "IX_MConta_codCliente1",
+                table: "MConta",
                 column: "codCliente1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Filial_codEndereco1",
-                table: "Filial",
+                name: "IX_MFilial_codEndereco1",
+                table: "MFilial",
                 column: "codEndereco1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Funcionario_codCargo1",
-                table: "Funcionario",
+                name: "IX_MFuncionario_codCargo1",
+                table: "MFuncionario",
                 column: "codCargo1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pagamento_codForma1",
-                table: "Pagamento",
+                name: "IX_MPagamento_codForma1",
+                table: "MPagamento",
                 column: "codForma1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pagamento_numeroConta1",
-                table: "Pagamento",
+                name: "IX_MPagamento_numeroConta1",
+                table: "MPagamento",
                 column: "numeroConta1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Quarto_codTipoQuartocodTipo",
-                table: "Quarto",
+                name: "IX_MQuarto_codTipoQuartocodTipo",
+                table: "MQuarto",
                 column: "codTipoQuartocodTipo");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reserva_codCliente1",
-                table: "Reserva",
+                name: "IX_MReserva_codCliente1",
+                table: "MReserva",
                 column: "codCliente1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reserva_codFuncionario1",
-                table: "Reserva",
+                name: "IX_MReserva_codFuncionario1",
+                table: "MReserva",
                 column: "codFuncionario1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reserva_numeroQuarto1",
-                table: "Reserva",
+                name: "IX_MReserva_numeroQuarto1",
+                table: "MReserva",
                 column: "numeroQuarto1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ServicoLavanderia_codTipoServico1",
-                table: "ServicoLavanderia",
+                name: "IX_MServicoLavanderia_codTipoServico1",
+                table: "MServicoLavanderia",
                 column: "codTipoServico1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ServicoLavanderia_numeroConta1",
-                table: "ServicoLavanderia",
+                name: "IX_MServicoLavanderia_numeroConta1",
+                table: "MServicoLavanderia",
                 column: "numeroConta1");
         }
 
@@ -350,46 +350,46 @@ namespace HotelProjeto.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ConsumoRestauranteFrigobar");
+                name: "MConsumoRestauranteFrigobar");
 
             migrationBuilder.DropTable(
-                name: "Filial");
+                name: "MFilial");
 
             migrationBuilder.DropTable(
-                name: "Pagamento");
+                name: "MPagamento");
 
             migrationBuilder.DropTable(
-                name: "Reserva");
+                name: "MReserva");
 
             migrationBuilder.DropTable(
-                name: "ServicoLavanderia");
+                name: "MServicoLavanderia");
 
             migrationBuilder.DropTable(
-                name: "Endereco");
+                name: "MEndereco");
 
             migrationBuilder.DropTable(
-                name: "FormaPagamento");
+                name: "MFormaPagamento");
 
             migrationBuilder.DropTable(
-                name: "Funcionario");
+                name: "MFuncionario");
 
             migrationBuilder.DropTable(
-                name: "Quarto");
+                name: "MQuarto");
 
             migrationBuilder.DropTable(
-                name: "Conta");
+                name: "MConta");
 
             migrationBuilder.DropTable(
-                name: "TipoServicoLavanderia");
+                name: "MTipoServicoLavanderia");
 
             migrationBuilder.DropTable(
-                name: "Cargo");
+                name: "MCargo");
 
             migrationBuilder.DropTable(
-                name: "TipoQuarto");
+                name: "MTipoQuarto");
 
             migrationBuilder.DropTable(
-                name: "Cliente");
+                name: "MCliente");
         }
     }
 }
