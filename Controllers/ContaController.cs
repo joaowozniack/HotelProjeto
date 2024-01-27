@@ -5,33 +5,33 @@ namespace HotelProjeto;
 [Route("api/[controller]")]
 [ApiController]
 
-public class QuartoController : Controller
+public class ContaController : Controller
 {
     [HttpPost]
-    public void PostQuarto([FromBody] MQuarto quarto)
+    public void PostConta([FromBody] MConta conta)
     {
         using (var _context = new HotelProjetoContext())
         {
-            _context.MQuarto.Add(quarto);
+            _context.MConta.Add(conta);
             _context.SaveChanges();
         }
     }
 
     [HttpGet]
-    public List<MQuarto> GetQuartos()
+    public List<MConta> GetContas()
     {
         using (var _context = new HotelProjetoContext())
         {
-            return _context.MQuarto.ToList();
+            return _context.MConta.ToList();
         }
     }
 
     [HttpGet("numero")]
-    public IActionResult GetQuartoNumero([FromQuery] int numeroQuarto)
+    public IActionResult GetContaNumero([FromQuery] int numeroConta)
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MQuarto.FirstOrDefault(q => q.numeroQuarto == numeroQuarto);
+            var item = _context.MConta.FirstOrDefault(c => c.numeroConta == numeroConta);
             if (item == null)
             {
                 return NotFound("Quarto não encontrado.");
@@ -41,31 +41,31 @@ public class QuartoController : Controller
     }
 
     [HttpPut("numero")]
-    public void PutQuarto([FromQuery] int numeroQuarto, [FromBody] MQuarto quarto)
+    public void PutConta([FromQuery] int numeroConta, [FromBody] MConta conta)
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MQuarto.FirstOrDefault(q => q.numeroQuarto == numeroQuarto);
+            var item = _context.MConta.FirstOrDefault(c => c.numeroConta == numeroConta);
             if (item == null)
             {
                 return;
             }
-            _context.Entry(item).CurrentValues.SetValues(quarto);
+            _context.Entry(item).CurrentValues.SetValues(conta);
             _context.SaveChanges();
         }
     }
 
     [HttpDelete("numero")]
-    public void DeleteQuarto([FromQuery] int numeroQuarto)
+    public void DeleteConta([FromQuery] int numeroConta)
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MQuarto.FirstOrDefault(q => q.numeroQuarto == numeroQuarto);
+            var item = _context.MConta.FirstOrDefault(q => q.numeroConta == numeroConta);
             if (item == null)
             {
                 return;
             }
-            _context.MQuarto.Remove(item);
+            _context.MConta.Remove(item);
             _context.SaveChanges();
         }
     }

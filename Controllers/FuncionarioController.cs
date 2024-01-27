@@ -27,7 +27,7 @@ public class FuncionarioController : Controller
     }
 
     [HttpGet("codigo")]
-    public IActionResult GetFuncionarioId([FromQuery] int codFuncionario)
+    public IActionResult GetFuncionarioCod([FromQuery] int codFuncionario)
     {
         using (var _context = new HotelProjetoContext())
         {
@@ -60,12 +60,12 @@ public class FuncionarioController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MCliente.FirstOrDefault(c => c.codCliente == codFuncionario);
+            var item = _context.MFuncionario.FirstOrDefault(f => f.codFuncionario == codFuncionario);
             if (item == null)
             {
                 return;
             }
-            _context.MCliente.Remove(item);
+            _context.MFuncionario.Remove(item);
             _context.SaveChanges();
         }
     }
