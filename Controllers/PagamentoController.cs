@@ -4,67 +4,68 @@ namespace HotelProjeto;
 
 [Route("api/[controller]")]
 [ApiController]
-public class ClienteController : Controller
+
+public class PagamentoController : Controller
 {
     [HttpPost]
-    public void PostCliente([FromBody] MCliente cliente)
+    public void PostPagamento([FromBody] MPagamento pagamento)
     {
         using (var _context = new HotelProjetoContext())
         {
-            _context.MCliente.Add(cliente);
+            _context.MPagamento.Add(pagamento);
             _context.SaveChanges();
         }
     }
 
     [HttpGet]
-    public List<MCliente> GetClientes()
+    public List<MPagamento> GetPagamentos()
     {
         using (var _context = new HotelProjetoContext())
         {
-            return _context.MCliente.ToList();
+            return _context.MPagamento.ToList();
         }
     }
 
     [HttpGet("codigo")]
-    public IActionResult GetClienteId([FromQuery] int codCliente)
+    public IActionResult GetPagamentoCod([FromQuery] int codPagamento)
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MCliente.FirstOrDefault(c => c.codCliente == codCliente);
+            var item = _context.MPagamento.FirstOrDefault(p => p.codPagamento == codPagamento);
             if (item == null)
             {
-                return NotFound("Cliente não encontrado.");
+                return NotFound("Pagamento não encontrado.");
             }
             return new ObjectResult(item);
         }
     }
 
     [HttpPut("codigo")]
-    public void PutCliente([FromQuery] int codCliente, [FromBody] MCliente cliente)
+    public void PutPagamento([FromQuery] int codPagamento, [FromBody] MPagamento pagamento)
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MCliente.FirstOrDefault(t => t.codCliente == codCliente);
+            var item = _context.MPagamento.FirstOrDefault(p => p.codPagamento == codPagamento);
             if (item == null)
             {
                 return;
             }
-            _context.Entry(item).CurrentValues.SetValues(cliente);
+            _context.Entry(item).CurrentValues.SetValues(pagamento);
             _context.SaveChanges();
         }
     }
 
     [HttpDelete("codigo")]
-    public void DeleteCliente([FromQuery] int codCliente)
+    public void DeletePagamento([FromQuery] int codPagamento)
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MCliente.FirstOrDefault(c => c.codCliente == codCliente);
+            var item = _context.MPagamento.FirstOrDefault(p => p.codPagamento == codPagamento);
             if (item == null)
             {
                 return;
             }
-            _context.MCliente.Remove(item);
+            _context.MPagamento.Remove(item);
             _context.SaveChanges();
         }
     }

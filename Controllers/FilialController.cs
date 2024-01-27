@@ -5,67 +5,67 @@ namespace HotelProjeto;
 [Route("api/[controller]")]
 [ApiController]
 
-public class ContaController : Controller
+public class FilialController : Controller
 {
     [HttpPost]
-    public void PostConta([FromBody] MConta conta)
+    public void PostFilial([FromBody] MFilial filial)
     {
         using (var _context = new HotelProjetoContext())
         {
-            _context.MConta.Add(conta);
+            _context.MFilial.Add(filial);
             _context.SaveChanges();
         }
     }
 
     [HttpGet]
-    public List<MConta> GetContas()
+    public List<MFilial> GetFiliais()
     {
         using (var _context = new HotelProjetoContext())
         {
-            return _context.MConta.ToList();
+            return _context.MFilial.ToList();
         }
     }
 
-    [HttpGet("numero")]
-    public IActionResult GetContaNumero([FromQuery] int numeroConta)
+    [HttpGet("codigo")]
+    public IActionResult GetFilialCod([FromQuery] int codFilial)
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MConta.FirstOrDefault(c => c.numeroConta == numeroConta);
+            var item = _context.MFilial.FirstOrDefault(p => p.codFilial == codFilial);
             if (item == null)
             {
-                return NotFound("Conta não encontrado.");
+                return NotFound("Filial não encontrado.");
             }
             return new ObjectResult(item);
         }
     }
 
-    [HttpPut("numero")]
-    public void PutConta([FromQuery] int numeroConta, [FromBody] MConta conta)
+    [HttpPut("codigo")]
+    public void PutFilial([FromQuery] int codFilial, [FromBody] MFilial filial)
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MConta.FirstOrDefault(c => c.numeroConta == numeroConta);
+            var item = _context.MFilial.FirstOrDefault(p => p.codFilial == codFilial);
             if (item == null)
             {
                 return;
             }
-            _context.Entry(item).CurrentValues.SetValues(conta);
+            _context.Entry(item).CurrentValues.SetValues(filial);
             _context.SaveChanges();
         }
     }
 
-    [HttpDelete("numero")]
-    public void DeleteConta([FromQuery] int numeroConta)
+    [HttpDelete("codigo")]
+    public void DeleteFilial([FromQuery] int codFilial)
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MConta.FirstOrDefault(q => q.numeroConta == numeroConta);
+            var item = _context.MFilial.FirstOrDefault(p => p.codFilial == codFilial);
             if (item == null)
             {
                 return;
             }
-            _context.MConta.Remove(item);
+            _context.MFilial.Remove(item);
             _context.SaveChanges();
         }
     }
