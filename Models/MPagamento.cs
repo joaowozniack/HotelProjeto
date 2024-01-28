@@ -9,5 +9,6 @@ namespace HotelProjeto
         public int CodPagamento {get; set;}
         public MFormaPagamento? Forma {get; set;}
         public MConta? NumeroConta {get; set;}
+        
     }
 }

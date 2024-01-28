@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelProjeto;
 
@@ -8,12 +9,22 @@ namespace HotelProjeto;
 public class QuartoController : Controller
 {
     [HttpPost]
-    public void PostQuarto([FromBody] MQuarto quarto)
+    public ActionResult<MQuarto> PostQuarto([FromForm] int codTipoQuarto, [FromForm] double valorQuarto)
     {
         using (var _context = new HotelProjetoContext())
         {
+            MTipoQuarto? tipoQuarto = _context.MTipoQuarto.Find(codTipoQuarto);
+
+            if (tipoQuarto == null)
+            {
+                return NotFound("Tipo de Quarto não encontrado!");
+            }
+
+            MQuarto quarto = new MQuarto(tipoQuarto, valorQuarto);
             _context.MQuarto.Add(quarto);
             _context.SaveChanges();
+
+            return Ok(quarto);
         }
     }
 
@@ -22,7 +33,7 @@ public class QuartoController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            return _context.MQuarto.ToList();
+            return _context.MQuarto.Include(q => q.TipoQuarto).ToList();
         }
     }
 
@@ -31,42 +42,64 @@ public class QuartoController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MQuarto.FirstOrDefault(q => q.NumeroQuarto == numeroQuarto);
-            if (item == null)
+            var quarto = _context.MQuarto.Include(q => q.TipoQuarto)
+            .FirstOrDefault(q => q.NumeroQuarto == numeroQuarto);
+            if (quarto == null)
             {
                 return NotFound("Quarto não encontrado.");
             }
-            return new ObjectResult(item);
+            return new ObjectResult(quarto);
         }
     }
 
     [HttpPut("numero")]
-    public void PutQuarto([FromQuery] int numeroQuarto, [FromBody] MQuarto quarto)
+    public ActionResult<MQuarto> PutQuarto([FromForm] int numeroQuarto, [FromForm] int codTipoQuarto, 
+    [FromForm] double valorQuarto)
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MQuarto.FirstOrDefault(q => q.NumeroQuarto == numeroQuarto);
-            if (item == null)
+            MTipoQuarto? tipoQuarto = _context.MTipoQuarto.Find(codTipoQuarto);
+
+            if (tipoQuarto == null)
             {
-                return;
+                return NotFound("Tipo de Quarto não encontrado!");
             }
-            _context.Entry(item).CurrentValues.SetValues(quarto);
-            _context.SaveChanges();
+
+            var quarto = _context.MQuarto.FirstOrDefault(q => q.NumeroQuarto == numeroQuarto);
+            if (quarto == null)
+            {
+                return NotFound("Quarto não encontrado!");
+            }
+            try
+            {
+                quarto.TipoQuarto = tipoQuarto;
+                quarto.ValorQuarto = valorQuarto;
+
+                _context.SaveChanges();
+
+                return Ok(quarto);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest($"Erro na atualização do quarto: {ex.Message}");
+            }
         }
     }
 
     [HttpDelete("numero")]
-    public void DeleteQuarto([FromQuery] int numeroQuarto)
+    public IActionResult DeleteQuarto([FromForm] int numeroQuarto)
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MQuarto.FirstOrDefault(q => q.NumeroQuarto == numeroQuarto);
-            if (item == null)
+            var quarto = _context.MQuarto.FirstOrDefault(q => q.NumeroQuarto == numeroQuarto);
+            if (quarto == null)
             {
-                return;
+                return NotFound("Quarto não encontrado!");
             }
-            _context.MQuarto.Remove(item);
+            _context.MQuarto.Remove(quarto);
             _context.SaveChanges();
+
+            return Ok("Quarto excluído!");
         }
     }
 }

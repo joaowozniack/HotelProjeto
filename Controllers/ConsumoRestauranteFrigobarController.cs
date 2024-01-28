@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelProjeto;
 
@@ -8,12 +9,24 @@ namespace HotelProjeto;
 public class ConsumoRestauranteFrigobarController : Controller
 {
     [HttpPost]
-    public void PostConsRestFrig([FromBody] MConsumoRestauranteFrigobar consumoRestauranteFrigobar)
+    public ActionResult<MConsumoRestauranteFrigobar> PostConsRestFrig([FromForm] int numeroConta, [FromForm] string descricao,
+    [FromForm] double valor, [FromForm] bool restauranteEntregaQuarto)
     {
         using (var _context = new HotelProjetoContext())
         {
+            MConta? conta = _context.MConta.Find(numeroConta);
+            
+            if (conta == null)
+            {
+                return NotFound("Conta não encontrada!");
+            }
+
+            MConsumoRestauranteFrigobar consumoRestauranteFrigobar = new MConsumoRestauranteFrigobar(conta, descricao, valor,
+            restauranteEntregaQuarto);
             _context.MConsumoRestauranteFrigobar.Add(consumoRestauranteFrigobar);
             _context.SaveChanges();
+
+            return Ok(consumoRestauranteFrigobar);
         }
     }
 
@@ -22,7 +35,7 @@ public class ConsumoRestauranteFrigobarController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            return _context.MConsumoRestauranteFrigobar.ToList();
+            return _context.MConsumoRestauranteFrigobar.Include(c => c.Conta).ToList();
         }
     }
 
@@ -31,42 +44,66 @@ public class ConsumoRestauranteFrigobarController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MConsumoRestauranteFrigobar.FirstOrDefault(c => c.CodConsumo == codConsumo);
-            if (item == null)
+            var consumoRestauranteFrigobar = _context.MConsumoRestauranteFrigobar.Include(c => c.Conta)
+            .FirstOrDefault(c => c.CodConsumo == codConsumo);
+            if (consumoRestauranteFrigobar == null)
             {
                 return NotFound("Consumo não encontrado.");
             }
-            return new ObjectResult(item);
+            return new ObjectResult(consumoRestauranteFrigobar);
         }
     }
 
     [HttpPut("codigo")]
-    public void PutConsRestFrig([FromQuery] int codConsumo, [FromBody] MConsumoRestauranteFrigobar consumo)
+    public ActionResult<MConsumoRestauranteFrigobar> PutConsRestFrig([FromForm] int codConsumo, [FromForm] int numeroConta, 
+    [FromForm] string descricao, [FromForm] double valor, [FromForm] bool restauranteEntregaQuarto)
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MConsumoRestauranteFrigobar.FirstOrDefault(c => c.CodConsumo == codConsumo);
-            if (item == null)
+            MConta? conta = _context.MConta.Find(numeroConta);
+
+            if (conta == null)
             {
-                return;
+                return NotFound("Conta não encontrada!");
             }
-            _context.Entry(item).CurrentValues.SetValues(consumo);
-            _context.SaveChanges();
+
+            var consumoRestauranteFrigobar = _context.MConsumoRestauranteFrigobar.FirstOrDefault(c => c.CodConsumo == codConsumo);
+            if (consumoRestauranteFrigobar == null)
+            {
+                return NotFound("Consumo não encontrado!");
+            }
+            try
+            {
+                consumoRestauranteFrigobar.Conta = conta;
+                consumoRestauranteFrigobar.Descricao = descricao;
+                consumoRestauranteFrigobar.Valor = valor;
+                consumoRestauranteFrigobar.RestauranteEntregaQuarto = restauranteEntregaQuarto;
+
+                _context.SaveChanges();
+
+                return Ok(consumoRestauranteFrigobar);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest($"Erro na atualização do Consumo: {ex.Message}");
+            }
         }
     }
 
     [HttpDelete("codigo")]
-    public void DeleteConsRestFrig([FromQuery] int codConsumo)
+    public IActionResult DeleteConsRestFrig([FromForm] int codConsumo)
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MConsumoRestauranteFrigobar.FirstOrDefault(c => c.CodConsumo == codConsumo);
-            if (item == null)
+            var consumoRestauranteFrigobar = _context.MConsumoRestauranteFrigobar.FirstOrDefault(c => c.CodConsumo == codConsumo);
+            if (consumoRestauranteFrigobar == null)
             {
-                return;
+                return NotFound("Consumo não encontrado!");
             }
-            _context.MConsumoRestauranteFrigobar.Remove(item);
+            _context.MConsumoRestauranteFrigobar.Remove(consumoRestauranteFrigobar);
             _context.SaveChanges();
+
+            return Ok("Consumo excluído!");
         }
     }
 }

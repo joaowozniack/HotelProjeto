@@ -9,5 +9,14 @@ namespace HotelProjeto
         public int NumeroQuarto {get; set;}
         public MTipoQuarto? TipoQuarto {get; set;}
         public double ValorQuarto {get; set;}
+
+        public MQuarto(){
+
+        }
+
+        public MQuarto(MTipoQuarto tipoQuarto, double valorQuarto){
+            this.TipoQuarto = tipoQuarto;
+            this.ValorQuarto = valorQuarto;
+        }
     }
 }

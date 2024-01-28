@@ -167,6 +167,18 @@ namespace HotelProjeto.Migrations
                     b.Property<int>("QuantidadeEstrelas")
                         .HasColumnType("int");
 
+                    b.Property<int>("QuantidadeQuartoCasal")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuantidadeQuartoFamilia")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuantidadeQuartoPresidencial")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuantidadeQuartoSolteiro")
+                        .HasColumnType("int");
+
                     b.HasKey("CodFilial");
 
                     b.HasIndex("EnderecoCodEndereco");
@@ -255,35 +267,6 @@ namespace HotelProjeto.Migrations
                     b.HasIndex("TipoQuartoCodTipo");
 
                     b.ToTable("MQuarto");
-                });
-
-            modelBuilder.Entity("HotelProjeto.MQuartosFilial", b =>
-                {
-                    b.Property<int>("CodQuartosFilial")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CodQuartosFilial"));
-
-                    b.Property<int?>("FilialCodFilial")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuantidadeQuartos")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TipoQuartoCodTipo")
-                        .HasColumnType("int");
-
-                    b.Property<double>("ValorQuarto")
-                        .HasColumnType("float");
-
-                    b.HasKey("CodQuartosFilial");
-
-                    b.HasIndex("FilialCodFilial");
-
-                    b.HasIndex("TipoQuartoCodTipo");
-
-                    b.ToTable("MQuartosFilial");
                 });
 
             modelBuilder.Entity("HotelProjeto.MReserva", b =>
@@ -446,21 +429,6 @@ namespace HotelProjeto.Migrations
                     b.Navigation("TipoQuarto");
                 });
 
-            modelBuilder.Entity("HotelProjeto.MQuartosFilial", b =>
-                {
-                    b.HasOne("HotelProjeto.MFilial", "Filial")
-                        .WithMany("QuartosFilial")
-                        .HasForeignKey("FilialCodFilial");
-
-                    b.HasOne("HotelProjeto.MTipoQuarto", "TipoQuarto")
-                        .WithMany()
-                        .HasForeignKey("TipoQuartoCodTipo");
-
-                    b.Navigation("Filial");
-
-                    b.Navigation("TipoQuarto");
-                });
-
             modelBuilder.Entity("HotelProjeto.MReserva", b =>
                 {
                     b.HasOne("HotelProjeto.MCliente", "Cliente")
@@ -495,11 +463,6 @@ namespace HotelProjeto.Migrations
                     b.Navigation("NumeroConta");
 
                     b.Navigation("TipoServico");
-                });
-
-            modelBuilder.Entity("HotelProjeto.MFilial", b =>
-                {
-                    b.Navigation("QuartosFilial");
                 });
 #pragma warning restore 612, 618
         }

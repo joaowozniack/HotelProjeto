@@ -145,6 +145,10 @@ namespace HotelProjeto.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     EnderecoCodEndereco = table.Column<int>(type: "int", nullable: true),
+                    QuantidadeQuartoSolteiro = table.Column<int>(type: "int", nullable: false),
+                    QuantidadeQuartoCasal = table.Column<int>(type: "int", nullable: false),
+                    QuantidadeQuartoFamilia = table.Column<int>(type: "int", nullable: false),
+                    QuantidadeQuartoPresidencial = table.Column<int>(type: "int", nullable: false),
                     QuantidadeEstrelas = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -246,32 +250,6 @@ namespace HotelProjeto.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MQuartosFilial",
-                columns: table => new
-                {
-                    CodQuartosFilial = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FilialCodFilial = table.Column<int>(type: "int", nullable: true),
-                    TipoQuartoCodTipo = table.Column<int>(type: "int", nullable: true),
-                    QuantidadeQuartos = table.Column<int>(type: "int", nullable: false),
-                    ValorQuarto = table.Column<double>(type: "float", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MQuartosFilial", x => x.CodQuartosFilial);
-                    table.ForeignKey(
-                        name: "FK_MQuartosFilial_MFilial_FilialCodFilial",
-                        column: x => x.FilialCodFilial,
-                        principalTable: "MFilial",
-                        principalColumn: "CodFilial");
-                    table.ForeignKey(
-                        name: "FK_MQuartosFilial_MTipoQuarto_TipoQuartoCodTipo",
-                        column: x => x.TipoQuartoCodTipo,
-                        principalTable: "MTipoQuarto",
-                        principalColumn: "CodTipo");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "MReserva",
                 columns: table => new
                 {
@@ -339,16 +317,6 @@ namespace HotelProjeto.Migrations
                 column: "TipoQuartoCodTipo");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MQuartosFilial_FilialCodFilial",
-                table: "MQuartosFilial",
-                column: "FilialCodFilial");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MQuartosFilial_TipoQuartoCodTipo",
-                table: "MQuartosFilial",
-                column: "TipoQuartoCodTipo");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_MReserva_ClienteCodCliente",
                 table: "MReserva",
                 column: "ClienteCodCliente");
@@ -381,10 +349,10 @@ namespace HotelProjeto.Migrations
                 name: "MConsumoRestauranteFrigobar");
 
             migrationBuilder.DropTable(
-                name: "MPagamento");
+                name: "MFilial");
 
             migrationBuilder.DropTable(
-                name: "MQuartosFilial");
+                name: "MPagamento");
 
             migrationBuilder.DropTable(
                 name: "MReserva");
@@ -393,10 +361,10 @@ namespace HotelProjeto.Migrations
                 name: "MServicoLavanderia");
 
             migrationBuilder.DropTable(
-                name: "MFormaPagamento");
+                name: "MEndereco");
 
             migrationBuilder.DropTable(
-                name: "MFilial");
+                name: "MFormaPagamento");
 
             migrationBuilder.DropTable(
                 name: "MFuncionario");
@@ -409,9 +377,6 @@ namespace HotelProjeto.Migrations
 
             migrationBuilder.DropTable(
                 name: "MTipoServicoLavanderia");
-
-            migrationBuilder.DropTable(
-                name: "MEndereco");
 
             migrationBuilder.DropTable(
                 name: "MCargo");

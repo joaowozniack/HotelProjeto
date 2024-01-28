@@ -12,5 +12,17 @@ namespace HotelProjeto
         public string? Descricao {get; set;}
         public double Valor {get; set;}
         public bool RestauranteEntregaQuarto {get; set;}
+
+
+        public MConsumoRestauranteFrigobar() {
+
+        }
+
+        public MConsumoRestauranteFrigobar(MConta conta, string descricao, double valor, bool restauranteEntregaQuarto) {
+            this.Conta = conta;
+            this.Descricao = descricao;
+            this.Valor = valor;
+            this.RestauranteEntregaQuarto = restauranteEntregaQuarto;
+        }
     }
 }

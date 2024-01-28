@@ -7,12 +7,21 @@ namespace HotelProjeto;
 public class ClienteController : Controller
 {
     [HttpPost]
-    public void PostCliente([FromBody] MCliente cliente)
+    public ActionResult<MCliente> PostCliente([FromForm] string nome, [FromForm] string nacionalidade, [FromForm] string email,
+    [FromForm] string telefone)
     {
-        using (var _context = new HotelProjetoContext())
+        try
         {
-            _context.MCliente.Add(cliente);
-            _context.SaveChanges();
+            using (var _context = new HotelProjetoContext())
+            {
+                MCliente cliente = _context.MCliente.Add(new MCliente( nome, nacionalidade, email, telefone)).Entity;
+                _context.SaveChanges();
+                return Ok(cliente);
+            }
+        }
+        catch (Exception ex)
+        {
+            return BadRequest($"Erro na criação do cliente: {ex.Message}");
         }
     }
 
@@ -40,32 +49,46 @@ public class ClienteController : Controller
     }
 
     [HttpPut("codigo")]
-    public void PutCliente([FromQuery] int codCliente, [FromBody] MCliente cliente)
+    public ActionResult<MCliente> PutCliente([FromForm] int codCliente, [FromForm] string nome, 
+    [FromForm] string nacionalidade, [FromForm] string email, [FromForm] string telefone)
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MCliente.FirstOrDefault(t => t.CodCliente == codCliente);
-            if (item == null)
+            var cliente = _context.MCliente.FirstOrDefault(c => c.CodCliente == codCliente);
+            if (cliente == null)
             {
-                return;
+                return NotFound("Cliente não encontrado");
             }
-            _context.Entry(item).CurrentValues.SetValues(cliente);
-            _context.SaveChanges();
+            try
+            {
+                cliente.Nome = nome;
+                cliente.Nacionalidade = nacionalidade;
+                cliente.Email = email;
+                cliente.Telefone = telefone;
+
+                _context.SaveChanges();
+                return Ok(cliente);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro na atualização do cliente: {ex.Message}");
+            }
         }
     }
 
     [HttpDelete("codigo")]
-    public void DeleteCliente([FromQuery] int codCliente)
+    public IActionResult DeleteCliente([FromForm] int codCliente)
     {
         using (var _context = new HotelProjetoContext())
         {
             var item = _context.MCliente.FirstOrDefault(c => c.CodCliente == codCliente);
             if (item == null)
             {
-                return;
+                return NotFound("Cliente não encontrado!");
             }
             _context.MCliente.Remove(item);
             _context.SaveChanges();
+            return Ok("Cliente excluído");
         }
     }
 }

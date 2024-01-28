@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelProjeto;
 
@@ -8,12 +9,22 @@ namespace HotelProjeto;
 public class ContaController : Controller
 {
     [HttpPost]
-    public void PostConta([FromBody] MConta conta)
+    public ActionResult<MConta> PostConta([FromForm] int codCliente, [FromForm] double valorTotal )
     {
         using (var _context = new HotelProjetoContext())
         {
+            MCliente? cliente = _context.MCliente.Find(codCliente);
+            
+            if (cliente == null)
+            {
+                return NotFound("Cliente não encontrado!");
+            }
+
+            MConta conta = new MConta(cliente, valorTotal);
             _context.MConta.Add(conta);
             _context.SaveChanges();
+
+            return Ok(conta);
         }
     }
 
@@ -22,7 +33,7 @@ public class ContaController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            return _context.MConta.ToList();
+            return _context.MConta.Include(c => c.Cliente).ToList();
         }
     }
 
@@ -31,42 +42,64 @@ public class ContaController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MConta.FirstOrDefault(c => c.NumeroConta == numeroConta);
-            if (item == null)
+            var conta = _context.MConta.Include(c => c.Cliente)
+            .FirstOrDefault(c => c.NumeroConta == numeroConta);
+            if (conta == null)
             {
                 return NotFound("Conta não encontrada.");
             }
-            return new ObjectResult(item);
+            return new ObjectResult(conta);
         }
     }
 
     [HttpPut("numero")]
-    public void PutConta([FromQuery] int numeroConta, [FromBody] MConta conta)
+    public ActionResult<MConta> PutConta([FromForm] int numeroConta, [FromForm] int codCliente, [FromForm] double valorTotal)
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MConta.FirstOrDefault(c => c.NumeroConta == numeroConta);
-            if (item == null)
+            MCliente? cliente = _context.MCliente.Find(codCliente);
+
+            if (cliente == null)
             {
-                return;
+                return NotFound("Cliente não encontrado!");
             }
-            _context.Entry(item).CurrentValues.SetValues(conta);
-            _context.SaveChanges();
+
+            var conta = _context.MConta.FirstOrDefault(c => c.NumeroConta == numeroConta);
+            if (conta == null)
+            {
+                return NotFound("Conta não encontrada!");
+            }
+
+            try
+            {
+                conta.Cliente = cliente;
+                conta.ValorTotal = valorTotal;
+
+                _context.SaveChanges();
+
+                return Ok(conta);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro na atualização da Conta: {ex.Message}");
+            }
         }
     }
 
     [HttpDelete("numero")]
-    public void DeleteConta([FromQuery] int numeroConta)
+    public IActionResult DeleteConta([FromForm] int numeroConta)
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MConta.FirstOrDefault(c => c.NumeroConta == numeroConta);
-            if (item == null)
+            var conta = _context.MConta.FirstOrDefault(c => c.NumeroConta == numeroConta);
+            if (conta == null)
             {
-                return;
+                return NotFound("Conta não encontrada!");
             }
-            _context.MConta.Remove(item);
+            _context.MConta.Remove(conta);
             _context.SaveChanges();
+
+            return Ok("Conta excluída!");
         }
     }
 }

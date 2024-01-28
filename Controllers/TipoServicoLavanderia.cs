@@ -8,11 +8,11 @@ namespace HotelProjeto;
 public class TipoServicoLavanderia : Controller
 {
     [HttpGet]
-    public List<MEndereco> GetTipoServicoLavanderias()
+    public List<MTipoServicoLavanderia> GetTipoServicoLavanderias()
     {
         using (var _context = new HotelProjetoContext())
         {
-            return _context.MEndereco.ToList();
+            return _context.MTipoServicoLavanderia.ToList();
         }
     }
 }

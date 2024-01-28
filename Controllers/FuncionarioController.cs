@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelProjeto;
 
@@ -8,12 +9,22 @@ namespace HotelProjeto;
 public class FuncionarioController : Controller
 {
     [HttpPost]
-    public void PostFuncionario([FromBody] MFuncionario funcionario)
+    public ActionResult<MFuncionario> PostFuncionario([FromForm] int codCargo, [FromForm] string nome)
     {
         using (var _context = new HotelProjetoContext())
         {
+            MCargo? cargo = _context.MCargo.Find(codCargo);
+
+            if (cargo == null)
+            {
+                return NotFound("Cargo não encontrado!");
+            }
+
+            MFuncionario funcionario = new MFuncionario(cargo, nome);
             _context.MFuncionario.Add(funcionario);
             _context.SaveChanges();
+
+            return Ok(funcionario);
         }
     }
 
@@ -22,7 +33,7 @@ public class FuncionarioController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            return _context.MFuncionario.ToList();
+            return _context.MFuncionario.Include(f => f.Cargo).ToList();
         }
     }
 
@@ -31,42 +42,64 @@ public class FuncionarioController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MFuncionario.FirstOrDefault(f => f.CodFuncionario == codFuncionario);
-            if (item == null)
+            var funcionario = _context.MFuncionario.Include(f => f.Cargo)
+            .FirstOrDefault(f => f.CodFuncionario == codFuncionario);
+            if (funcionario == null)
             {
                 return NotFound("Funcionário não encontrado.");
             }
-            return new ObjectResult(item);
+            return new ObjectResult(funcionario);
         }
     }
 
     [HttpPut("codigo")]
-    public void PutFuncionario([FromQuery] int codFuncionario, [FromBody] MFuncionario funcionario)
+    public ActionResult<MFuncionario> PutFuncionario([FromForm] int codFuncionario, [FromForm] int codCargo, 
+    [FromForm] string nome)
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MFuncionario.FirstOrDefault(c => c.CodFuncionario == codFuncionario);
-            if (item == null)
+            MCargo? cargo = _context.MCargo.Find(codCargo);
+
+            if (cargo == null)
             {
-                return;
+                return NotFound("Cargo não encontrado!");
             }
-            _context.Entry(item).CurrentValues.SetValues(funcionario);
-            _context.SaveChanges();
+
+            var funcionario = _context.MFuncionario.FirstOrDefault(f => f.CodFuncionario == codFuncionario);
+            if (funcionario == null)
+            {
+                return NotFound("Funcionário não encontrado!");
+            }
+            try
+            {
+                funcionario.Cargo = cargo;
+                funcionario.Nome = nome;
+
+                _context.SaveChanges();
+
+                return Ok(funcionario);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest($"Erro na atualização do funcionario: {ex.Message}");
+            }
         }
     }
 
     [HttpDelete("codigo")]
-    public void DeleteFuncionario([FromQuery] int codFuncionario)
+    public IActionResult DeleteFuncionario([FromForm] int codFuncionario)
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MFuncionario.FirstOrDefault(f => f.CodFuncionario == codFuncionario);
-            if (item == null)
+            var funcionario = _context.MFuncionario.FirstOrDefault(f => f.CodFuncionario == codFuncionario);
+            if (funcionario == null)
             {
-                return;
+                return NotFound("Funcionário não encontrado!");
             }
-            _context.MFuncionario.Remove(item);
+            _context.MFuncionario.Remove(funcionario);
             _context.SaveChanges();
+
+            return Ok("Funcionário excluído!");
         }
     }
 }
