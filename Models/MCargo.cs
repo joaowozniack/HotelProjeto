@@ -5,7 +5,8 @@ namespace HotelProjeto
     public class MCargo
     {
         [Key]
-        public int codCargo {get; set;}
-        public string? nomeCargo {get; set;}
+        public int CodCargo {get; set;}
+        [MaxLength(15)]
+        public string? NomeCargo {get; set;}
     }
 }

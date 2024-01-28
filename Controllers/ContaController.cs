@@ -27,14 +27,14 @@ public class ContaController : Controller
     }
 
     [HttpGet("numero")]
-    public IActionResult GetContaNumero([FromQuery] int numeroConta)
+    public IActionResult GetConta([FromQuery] int numeroConta)
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MConta.FirstOrDefault(c => c.numeroConta == numeroConta);
+            var item = _context.MConta.FirstOrDefault(c => c.NumeroConta == numeroConta);
             if (item == null)
             {
-                return NotFound("Conta não encontrado.");
+                return NotFound("Conta não encontrada.");
             }
             return new ObjectResult(item);
         }
@@ -45,7 +45,7 @@ public class ContaController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MConta.FirstOrDefault(c => c.numeroConta == numeroConta);
+            var item = _context.MConta.FirstOrDefault(c => c.NumeroConta == numeroConta);
             if (item == null)
             {
                 return;
@@ -60,7 +60,7 @@ public class ContaController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MConta.FirstOrDefault(q => q.numeroConta == numeroConta);
+            var item = _context.MConta.FirstOrDefault(c => c.NumeroConta == numeroConta);
             if (item == null)
             {
                 return;

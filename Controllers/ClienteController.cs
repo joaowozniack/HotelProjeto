@@ -30,7 +30,7 @@ public class ClienteController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MCliente.FirstOrDefault(c => c.codCliente == codCliente);
+            var item = _context.MCliente.FirstOrDefault(c => c.CodCliente == codCliente);
             if (item == null)
             {
                 return NotFound("Cliente não encontrado.");
@@ -44,7 +44,7 @@ public class ClienteController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MCliente.FirstOrDefault(t => t.codCliente == codCliente);
+            var item = _context.MCliente.FirstOrDefault(t => t.CodCliente == codCliente);
             if (item == null)
             {
                 return;
@@ -59,7 +59,7 @@ public class ClienteController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MCliente.FirstOrDefault(c => c.codCliente == codCliente);
+            var item = _context.MCliente.FirstOrDefault(c => c.CodCliente == codCliente);
             if (item == null)
             {
                 return;

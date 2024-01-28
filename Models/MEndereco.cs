@@ -5,11 +5,15 @@ namespace HotelProjeto
     public class MEndereco
     {
         [Key]
-        public int codEndereco {get; set;}
-        public string? rua {get; set;}
-        public int numero {get; set;}
-        public string? bairro {get; set;}
-        public string? cidade {get; set;}
-        public string? estado {get; set;}
+        public int CodEndereco {get; set;}
+        [MaxLength(60)]
+        public string? Rua {get; set;}
+        public int Numero {get; set;}
+        [MaxLength(30)]
+        public string? Bairro {get; set;}
+        [MaxLength(30)]
+        public string? Cidade {get; set;}
+        [MaxLength(30)]
+        public string? Estado {get; set;}
     }
 }

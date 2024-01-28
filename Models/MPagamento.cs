@@ -1,12 +1,13 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HotelProjeto
 {
     public class MPagamento
     {
         [Key]
-        public int codPagamento {get; set;}
-        public MFormaPagamento? codForma {get; set;}
-        public MConta? numeroConta {get; set;}
+        public int CodPagamento {get; set;}
+        public MFormaPagamento? Forma {get; set;}
+        public MConta? NumeroConta {get; set;}
     }
 }

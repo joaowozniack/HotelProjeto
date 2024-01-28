@@ -31,7 +31,7 @@ public class QuartoController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MQuarto.FirstOrDefault(q => q.numeroQuarto == numeroQuarto);
+            var item = _context.MQuarto.FirstOrDefault(q => q.NumeroQuarto == numeroQuarto);
             if (item == null)
             {
                 return NotFound("Quarto não encontrado.");
@@ -45,7 +45,7 @@ public class QuartoController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MQuarto.FirstOrDefault(q => q.numeroQuarto == numeroQuarto);
+            var item = _context.MQuarto.FirstOrDefault(q => q.NumeroQuarto == numeroQuarto);
             if (item == null)
             {
                 return;
@@ -60,7 +60,7 @@ public class QuartoController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MQuarto.FirstOrDefault(q => q.numeroQuarto == numeroQuarto);
+            var item = _context.MQuarto.FirstOrDefault(q => q.NumeroQuarto == numeroQuarto);
             if (item == null)
             {
                 return;

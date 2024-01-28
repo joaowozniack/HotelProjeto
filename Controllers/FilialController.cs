@@ -27,14 +27,14 @@ public class FilialController : Controller
     }
 
     [HttpGet("codigo")]
-    public IActionResult GetFilialCod([FromQuery] int codFilial)
+    public IActionResult GetFilial([FromQuery] int codFilial)
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MFilial.FirstOrDefault(p => p.codFilial == codFilial);
+            var item = _context.MFilial.FirstOrDefault(f => f.CodFilial == codFilial);
             if (item == null)
             {
-                return NotFound("Filial não encontrado.");
+                return NotFound("Filial não encontrada.");
             }
             return new ObjectResult(item);
         }
@@ -45,7 +45,7 @@ public class FilialController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MFilial.FirstOrDefault(p => p.codFilial == codFilial);
+            var item = _context.MFilial.FirstOrDefault(f => f.CodFilial == codFilial);
             if (item == null)
             {
                 return;
@@ -60,7 +60,7 @@ public class FilialController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MFilial.FirstOrDefault(p => p.codFilial == codFilial);
+            var item = _context.MFilial.FirstOrDefault(f => f.CodFilial == codFilial);
             if (item == null)
             {
                 return;

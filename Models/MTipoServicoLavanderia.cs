@@ -5,8 +5,9 @@ namespace HotelProjeto
     public class MTipoServicoLavanderia
     {
         [Key]
-        public int codTipoServico {get; set;}
-        public string? servico {get; set;}
-        public double valor {get; set;}
+        public int CodTipoServico {get; set;}
+        [MaxLength(40)]
+        public string? Servico {get; set;}
+        public double Valor {get; set;}
     }
 }

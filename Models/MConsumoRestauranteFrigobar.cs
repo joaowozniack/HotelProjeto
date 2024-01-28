@@ -1,14 +1,16 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HotelProjeto
 {
     public class MConsumoRestauranteFrigobar
     {
         [Key]
-        public int codConsumo {get; set;}
-        public MConta? numeroConta {get; set;}
-        public string? descricao {get; set;}
-        public double valor {get; set;}
-        public bool restauranteEntregaQuarto {get; set;}
+        public int CodConsumo {get; set;}
+        public MConta? Conta {get; set;}
+        [MaxLength(50)]
+        public string? Descricao {get; set;}
+        public double Valor {get; set;}
+        public bool RestauranteEntregaQuarto {get; set;}
     }
 }

@@ -5,9 +5,10 @@ namespace HotelProjeto
     public class MTipoQuarto
     {
         [Key]
-        public int codTipo {get; set;}
-        public string? tipo {get; set;}
-        public int capcidadeMaxima {get; set;}
-        public bool capacidadeOpcional {get; set;}
+        public int CodTipo {get; set;}
+        [MaxLength(15)]
+        public string? Tipo {get; set;}
+        public int CapacidadeMaxima {get; set;}
+        public bool CapacidadeOpcional {get; set;}
     }
 }

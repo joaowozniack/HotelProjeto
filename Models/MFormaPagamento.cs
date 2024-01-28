@@ -5,7 +5,8 @@ namespace HotelProjeto
     public class MFormaPagamento 
     {
         [Key]
-        public int codForma {get; set;}
-        public string? forma {get; set;}
+        public int CodForma {get; set;}
+        [MaxLength(20)]
+        public string? Forma {get; set;}
     }
 }

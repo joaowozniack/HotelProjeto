@@ -6,21 +6,15 @@ namespace HotelProjeto
     public class MCliente
     {
         [Key]
-        public int codCliente {get; set;}
-        public string? nome {get; set;}
-        public string? nacionalidade {get; set;}
-        public string? email {get; set;}
-        public string? telefone {get; set;}
+        public int CodCliente {get; set;}
+        [MaxLength(30)]
+        public string? Nome {get; set;}
+        [MaxLength(20)]
+        public string? Nacionalidade {get; set;}
+        [MaxLength(45)]
+        public string? Email {get; set;}
+        [MaxLength(15)]
+        public string? Telefone {get; set;}
 
-        public MCliente(){
-        }
-
-        public MCliente(int codCliente, string nome, string nacionalidade, string email, string telefone){
-            this.codCliente = codCliente;
-            this.nome = nome;
-            this.nacionalidade = nacionalidade;
-            this.email = email;
-            this.telefone = telefone;
-        }
     }
 }

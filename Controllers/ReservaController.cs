@@ -18,11 +18,11 @@ public class ReservaController : Controller
     }
 
     [HttpGet]
-    public List<MFuncionario> GetReservas()
+    public List<MReserva> GetReservas()
     {
         using (var _context = new HotelProjetoContext())
         {
-            return _context.MFuncionario.ToList();
+            return _context.MReserva.ToList();
         }
     }
 
@@ -31,10 +31,10 @@ public class ReservaController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MReserva.FirstOrDefault(r => r.codReserva == codReserva);
+            var item = _context.MReserva.FirstOrDefault(r => r.CodReserva == codReserva);
             if (item == null)
             {
-                return NotFound("Reserva não encontrado.");
+                return NotFound("Reserva não encontrada.");
             }
             return new ObjectResult(item);
         }
@@ -45,7 +45,7 @@ public class ReservaController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MReserva.FirstOrDefault(t => t.codReserva == codReserva);
+            var item = _context.MReserva.FirstOrDefault(r => r.CodReserva == codReserva);
             if (item == null)
             {
                 return;
@@ -56,11 +56,11 @@ public class ReservaController : Controller
     }
 
     [HttpDelete("codigo")]
-    public void DeleteFuncionario([FromQuery] int codReserva)
+    public void DeleteQuarto([FromQuery] int codReserva)
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MReserva.FirstOrDefault(f => f.codReserva == codReserva);
+            var item = _context.MReserva.FirstOrDefault(r => r.CodReserva == codReserva);
             if (item == null)
             {
                 return;

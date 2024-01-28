@@ -31,7 +31,7 @@ public class FuncionarioController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MFuncionario.FirstOrDefault(f => f.codFuncionario == codFuncionario);
+            var item = _context.MFuncionario.FirstOrDefault(f => f.CodFuncionario == codFuncionario);
             if (item == null)
             {
                 return NotFound("Funcionário não encontrado.");
@@ -45,7 +45,7 @@ public class FuncionarioController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MFuncionario.FirstOrDefault(t => t.codFuncionario == codFuncionario);
+            var item = _context.MFuncionario.FirstOrDefault(c => c.CodFuncionario == codFuncionario);
             if (item == null)
             {
                 return;
@@ -60,7 +60,7 @@ public class FuncionarioController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MFuncionario.FirstOrDefault(f => f.codFuncionario == codFuncionario);
+            var item = _context.MFuncionario.FirstOrDefault(f => f.CodFuncionario == codFuncionario);
             if (item == null)
             {
                 return;

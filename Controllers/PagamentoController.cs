@@ -31,7 +31,7 @@ public class PagamentoController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MPagamento.FirstOrDefault(p => p.codPagamento == codPagamento);
+            var item = _context.MPagamento.FirstOrDefault(p => p.CodPagamento == codPagamento);
             if (item == null)
             {
                 return NotFound("Pagamento não encontrado.");
@@ -45,7 +45,7 @@ public class PagamentoController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MPagamento.FirstOrDefault(p => p.codPagamento == codPagamento);
+            var item = _context.MPagamento.FirstOrDefault(p => p.CodPagamento == codPagamento);
             if (item == null)
             {
                 return;
@@ -60,7 +60,7 @@ public class PagamentoController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MPagamento.FirstOrDefault(p => p.codPagamento == codPagamento);
+            var item = _context.MPagamento.FirstOrDefault(p => p.CodPagamento == codPagamento);
             if (item == null)
             {
                 return;

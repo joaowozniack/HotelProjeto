@@ -1,21 +1,16 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HotelProjeto
 {
     public class MFilial
     {
         [Key]
-        public int codFilial {get; set;}
-        public string? nome {get; set;}
-        public MEndereco? codEndereco {get; set;}
-        public int numeroQuartoSolteiro {get; set;}
-        public double valorQuartoSolteiro {get; set;}
-        public int numeroQuartoCasal {get; set;}
-        public double valorQuartoCasal {get; set;}
-        public int numeroQuartoFamilia {get; set;}
-        public double valorQuartoFamilia {get; set;}
-        public int numeroQuartoPresidencial {get; set;}
-        public double valorQuartoPresidencial {get; set;}
-        public int quantidadeEstrelas {get; set;}
+        public int CodFilial {get; set;}
+        [MaxLength(30)]
+        public string? Nome {get; set;}
+        public MEndereco? Endereco {get; set;}
+        public ICollection<MQuartosFilial>? QuartosFilial { get; set; } = new List<MQuartosFilial>();
+        public int QuantidadeEstrelas {get; set;}
     }
 }

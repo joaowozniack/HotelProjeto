@@ -31,7 +31,7 @@ public class ServicoLavanderiaController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MServicoLavanderia.FirstOrDefault(p => p.codServico == codServico);
+            var item = _context.MServicoLavanderia.FirstOrDefault(p => p.CodServico == codServico);
             if (item == null)
             {
                 return NotFound("Filial não encontrado.");
@@ -45,7 +45,7 @@ public class ServicoLavanderiaController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MServicoLavanderia.FirstOrDefault(p => p.codServico == codServico);
+            var item = _context.MServicoLavanderia.FirstOrDefault(p => p.CodServico == codServico);
             if (item == null)
             {
                 return;
@@ -60,7 +60,7 @@ public class ServicoLavanderiaController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MServicoLavanderia.FirstOrDefault(p => p.codServico == codServico);
+            var item = _context.MServicoLavanderia.FirstOrDefault(p => p.CodServico == codServico);
             if (item == null)
             {
                 return;

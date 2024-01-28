@@ -27,30 +27,30 @@ public class ConsumoRestauranteFrigobarController : Controller
     }
 
     [HttpGet("codigo")]
-    public IActionResult GetConsRestFrigCod([FromQuery] int codConsumo)
+    public IActionResult GetConsRestFrig([FromQuery] int codConsumo)
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MConsumoRestauranteFrigobar.FirstOrDefault(p => p.codConsumo == codConsumo);
+            var item = _context.MConsumoRestauranteFrigobar.FirstOrDefault(c => c.CodConsumo == codConsumo);
             if (item == null)
             {
-                return NotFound("Filial não encontrado.");
+                return NotFound("Consumo não encontrado.");
             }
             return new ObjectResult(item);
         }
     }
 
     [HttpPut("codigo")]
-    public void PutConsRestFrig([FromQuery] int codConsumo, [FromBody] MConsumoRestauranteFrigobar consumoRestauranteFrigobar)
+    public void PutConsRestFrig([FromQuery] int codConsumo, [FromBody] MConsumoRestauranteFrigobar consumo)
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MConsumoRestauranteFrigobar.FirstOrDefault(p => p.codConsumo == codConsumo);
+            var item = _context.MConsumoRestauranteFrigobar.FirstOrDefault(c => c.CodConsumo == codConsumo);
             if (item == null)
             {
                 return;
             }
-            _context.Entry(item).CurrentValues.SetValues(consumoRestauranteFrigobar);
+            _context.Entry(item).CurrentValues.SetValues(consumo);
             _context.SaveChanges();
         }
     }
@@ -60,7 +60,7 @@ public class ConsumoRestauranteFrigobarController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            var item = _context.MConsumoRestauranteFrigobar.FirstOrDefault(p => p.codConsumo == codConsumo);
+            var item = _context.MConsumoRestauranteFrigobar.FirstOrDefault(c => c.CodConsumo == codConsumo);
             if (item == null)
             {
                 return;
