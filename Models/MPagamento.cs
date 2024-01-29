@@ -8,7 +8,16 @@ namespace HotelProjeto
         [Key]
         public int CodPagamento {get; set;}
         public MFormaPagamento? Forma {get; set;}
-        public MConta? NumeroConta {get; set;}
+        public MConta? Conta {get; set;}
+
+        public MPagamento() {
+
+        }
+
+        public MPagamento(MFormaPagamento forma, MConta numeroConta) {
+            this.Forma = forma;
+            this.Conta = numeroConta;
+        }
         
     }
 }

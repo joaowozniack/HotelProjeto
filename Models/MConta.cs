@@ -7,7 +7,7 @@ namespace HotelProjeto
     {
         [Key]
         public int NumeroConta {get; set;}
-        public MCliente? Cliente {get; set;}
+        public MCliente Cliente {get; set;}
         public double ValorTotal {get; set;}
 
         public MConta() {

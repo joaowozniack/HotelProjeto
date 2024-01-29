@@ -12,5 +12,19 @@ namespace HotelProjeto
         public MCliente? Cliente {get; set;}
         public DateOnly DataCheckin {get; set;}
         public DateOnly DataCheckout {get; set;}
+
+
+        public MReserva() {
+
+        }
+
+        public MReserva(MQuarto quarto, MFuncionario funcionario, MCliente cliente,
+        DateOnly dataCheckin, DateOnly dataChekout) {
+            this.Quarto = quarto;
+            this.Funcionario = funcionario;
+            this.Cliente = cliente;
+            this.DataCheckin = dataCheckin;
+            this.DataCheckout = dataChekout;
+        }
     }
 }
