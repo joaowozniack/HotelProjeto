@@ -107,7 +107,7 @@ public class ReservaController : Controller
     }
 
     [HttpDelete("codigo")]
-    public ActionResult DeleteQuarto([FromForm] int codReserva)
+    public ActionResult DeleteReserva([FromForm] int codReserva)
     {
         using (var _context = new HotelProjetoContext())
         {
