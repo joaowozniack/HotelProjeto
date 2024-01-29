@@ -15,5 +15,14 @@ namespace HotelProjeto
         public string? Cidade {get; set;}
         [MaxLength(30)]
         public string? Estado {get; set;}
+
+        public MEndereco() {
+
+        }
+
+        public MEndereco(string rua, int numero, string bairro, string cidade, string Estado) {
+
+        }
+
     }
 }

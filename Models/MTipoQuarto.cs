@@ -10,5 +10,15 @@ namespace HotelProjeto
         public string? Tipo {get; set;}
         public int CapacidadeMaxima {get; set;}
         public bool CapacidadeOpcional {get; set;}
+
+        public MTipoQuarto() {
+
+        }
+
+        public MTipoQuarto(string tipo, int capacidadeMaxima, bool capacidadeOpcional) {
+            this.Tipo = tipo;
+            this.CapacidadeMaxima = capacidadeMaxima;
+            this.CapacidadeOpcional = capacidadeOpcional;
+        }
     }
 }

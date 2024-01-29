@@ -15,6 +15,10 @@ namespace HotelProjeto
         public string? Email {get; set;}
         [MaxLength(15)]
         public string? Telefone {get; set;}
+
+        public MCliente (){
+
+        }
         public MCliente(string nome, string nacionalidade, string email, string telefone){
             this.Nome = nome;
             this.Nacionalidade = nacionalidade;

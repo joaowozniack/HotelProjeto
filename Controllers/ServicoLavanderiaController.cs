@@ -14,7 +14,7 @@ public class ServicoLavanderiaController : Controller
         using (var _context = new HotelProjetoContext())
         {
 
-            MConta? conta = _context.MConta.Find(numeroConta);
+            MConta? conta = _context.MConta.Include(c => c.Cliente).First(c => c.NumeroConta == numeroConta);
             if (conta == null)
             {
                 return NotFound("Conta não encontrada!");
@@ -64,7 +64,7 @@ public class ServicoLavanderiaController : Controller
     {
         using (var _context = new HotelProjetoContext())
         {
-            MConta? conta = _context.MConta.Find(numeroConta);
+            MConta? conta = _context.MConta.Include(c => c.Cliente).First(c => c.NumeroConta == numeroConta);
             if (conta == null)
             {
                 return NotFound("Conta não encontrada!");
